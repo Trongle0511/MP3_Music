@@ -28,4 +28,24 @@ public class HomeController {
         model.addAttribute("account", account);
         return "redirect:/MusicMp3";
     }
+    @GetMapping("/register")
+    public String register() {
+
+        return "Admin/auth/register";
+    }
+    @GetMapping("/forgot-password")
+    public String forgotpassword() {
+
+        return "Admin/auth/forgot-password";
+    }
+    @GetMapping("/reset")
+    public String reset() {
+
+        return "Admin/auth/reset-password";
+    }
+    @GetMapping("/detail")
+    public String detail() {
+
+        return "Home/SinglePlaylistScreen";
+    }
 }
