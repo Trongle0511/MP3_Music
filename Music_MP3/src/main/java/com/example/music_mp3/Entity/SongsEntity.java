@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +17,7 @@ public class SongsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int songID;
 
-    @Column(name = "SongName", nullable = false, length = 100)
+    @Column(name = "SongName")
     private String songName;
 
     @ManyToOne
@@ -30,11 +29,11 @@ public class SongsEntity {
     private ArtistsEntity artist;
 
     @Lob
-    @Column(name = "SongImage")
+    @Column(name = "Song_Image")
     private String songImage;
 
     @Lob
-    @Column(name = "SongAudio")
+    @Column(name = "Song_Audio")
     private byte[] songAudio;
 
     @OneToMany(mappedBy = "song")
@@ -46,3 +45,4 @@ public class SongsEntity {
     @OneToMany(mappedBy = "song")
     private List<PlaylistSongsEntity> playlistSongs;
 }
+
