@@ -5,36 +5,33 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Accounts")
-public class AccountsEntity {
+@Table(name = "Account")
+public class AccountsEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(name = "Username", nullable = false, length = 50)
+    @Column(name = "username", unique = true, nullable = false, length = 50)
     private String username;
 
-    @Column(name = "Email", nullable = false, length = 100)
+    @Column(name = "email", unique = true, nullable = false, length = 100)
     private String email;
 
-    @Column(name = "Hashed_Password", nullable = false, length = 255)
+    @Column(name = "hashed_password", nullable = false, length = 255)
     private String hashedPassword;
 
-    @Column(name = "is_disable")
-    private boolean isDisable;
+    @Column(name = "role")
+    private Boolean role;
 
-    @Column(name = "is_admin")
-    private boolean isAdmin;
-
-    @OneToMany(mappedBy = "account")
-    private List<SongRatingsEntity> songRatings;
-
-    @OneToMany(mappedBy = "account")
-    private List<PlaylistsEntity> playlists;
+    @ManyToOne
+    @JoinColumn(name = "UserID", referencedColumnName = "UserID")
+    private UserEntity user;
 }
