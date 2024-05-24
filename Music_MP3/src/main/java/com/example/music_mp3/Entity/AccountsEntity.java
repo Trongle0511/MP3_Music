@@ -19,13 +19,13 @@ public class AccountsEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "username", unique = true, nullable = false, length = 50)
+    @Column(name = "Username", nullable = false)
     private String username;
 
-    @Column(name = "email", unique = true, nullable = false, length = 100)
+    @Column(name = "Email", nullable = false)
     private String email;
 
-    @Column(name = "hashed_password", nullable = false, length = 255)
+    @Column(name = "Hashed_Password", nullable = false)
     private String hashedPassword;
 
     @Column(name = "role")

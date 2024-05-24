@@ -1,6 +1,6 @@
 package com.example.music_mp3.Service;
 
-import com.example.music_mp3.Entity.Account;
+import com.example.music_mp3.Entity.AccountsEntity;
 import com.example.music_mp3.Repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -13,7 +13,7 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     public boolean authenticateUser(String email, String password) {
-        Account account = accountRepository.findByEmail(email);
+        AccountsEntity account = accountRepository.findByEmail(email);
         if (account == null || password == null) {
             return false;
         }
@@ -21,8 +21,8 @@ public class AccountService {
     }
 
     public boolean isAdmin(String email) {
-        Account account = accountRepository.findByEmail(email);
-        return account != null && account.is_admin();
+        AccountsEntity account = accountRepository.findByEmail(email);
+        return account != null && account.getRole();
     }
 }
 
