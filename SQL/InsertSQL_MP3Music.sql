@@ -6,15 +6,14 @@ go
 -- go
 
 -- Insert data into the Users table
-INSERT INTO Users (name, phone, image)
-VALUES 
-('John Doe', '123-456-7890', 'path/to/image1.jpg'),
-('Jane Smith', '987-654-3210', 'path/to/image2.jpg');
+-- Inserting data into Account table
+INSERT INTO Account (username, email, hashed_password, role) VALUES 
+('johndoe', 'johndoe@example.com', 'hashedpassword123', 0),
+('janedoe', 'janedoe@example.com', 'hashedpassword456', 1),
+('adminuser', 'admin@example.com', 'hashedpassword789', 1);
 
--- Insert data into the Account table using the retrieved UserIDs
-INSERT INTO Account (username, email, hashed_password, role, UserID)
-VALUES 
-('johndoe', 'abc@gmail.com', '$2a$12$HEOZxVFs3Fn771yu1RPAYOVd/o7pKT6tnvJ6di13Esmg035Pk.Iaa', 0, 1),
-('janesmith', 'admin@gmail.com', '$2a$12$HEOZxVFs3Fn771yu1RPAYOVd/o7pKT6tnvJ6di13Esmg035Pk.Iaa', 1, 2);
-
-select * from Account a join Users u on a.UserID=u.UserID
+-- Inserting data into Users table
+INSERT INTO Users (name, phone, image, account_ID) VALUES
+('John Doe', '123-456-7890', 'john_image.png', 1),
+('Jane Doe', '987-654-3210', 'jane_image.png', 2),
+('Admin User', '555-555-5555', 'admin_image.png', 3);

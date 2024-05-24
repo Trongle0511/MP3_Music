@@ -9,26 +9,23 @@ GO
 
 USE DuAnMP3_Music;
 GO
--- Bảng User
-CREATE TABLE Users (
-    UserID INT IDENTITY(1,1) PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    phone VARCHAR(15) NOT NULL,
-    image VARCHAR(MAX)
-);
 -- Bảng Account
 CREATE TABLE Account (
-    id INT IDENTITY(1,1) PRIMARY KEY,
+    user_Id INT IDENTITY(1,1) PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     hashed_password VARCHAR(255) NOT NULL,
-    role BIT,
-    UserID INT,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    role BIT
+
 );
-
-
-
+-- Bảng User
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    image VARCHAR(MAX),
+	account_ID int null foreign key references Account(user_Id)
+);
 -- Bảng Nghệ sĩ (Artists)
 CREATE TABLE Artists (
     ArtistID INT IDENTITY(1,1) PRIMARY KEY,
@@ -69,7 +66,7 @@ CREATE TABLE SongRatings (
     Views INT NOT NULL,
     UserID INT,
     FOREIGN KEY (SongID) REFERENCES Songs(SongID),
-    FOREIGN KEY (UserID) REFERENCES Account(id),
+    FOREIGN KEY (UserID) REFERENCES Account(user_Id),
     PRIMARY KEY (SongID, UserID)
 );
 
@@ -79,7 +76,7 @@ CREATE TABLE Playlist (
     PlaylistName VARCHAR(100) NOT NULL,
     Description TEXT,
     UserID INT,
-    FOREIGN KEY (UserID) REFERENCES Account(id)
+    FOREIGN KEY (UserID) REFERENCES Account(user_Id)
 );
 
 -- Bảng Chi tiết bài hát trong playlist (PlaylistSongs)
