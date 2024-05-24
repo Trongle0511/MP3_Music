@@ -5,17 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Accounts")
-public class AccountsEntity {
+@Table(name = "Account")
+public class AccountsEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "Username", nullable = false)
     private String username;
@@ -26,15 +28,10 @@ public class AccountsEntity {
     @Column(name = "Hashed_Password", nullable = false)
     private String hashedPassword;
 
-    @Column(name = "is_disable")
-    private boolean isDisable;
+    @Column(name = "role")
+    private Boolean role;
 
-    @Column(name = "is_admin")
-    private boolean isAdmin;
-
-    @OneToMany(mappedBy = "account")
-    private List<SongRatingsEntity> songRatings;
-
-    @OneToMany(mappedBy = "account")
-    private List<PlaylistsEntity> playlists;
+    @ManyToOne
+    @JoinColumn(name = "UserID", referencedColumnName = "UserID")
+    private UserEntity user;
 }
