@@ -17,21 +17,23 @@ public class AccountsEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "user_Id")
+    private Integer userId;
 
-    @Column(name = "Username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "Email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "Hashed_Password", nullable = false)
+    @Column(name = "hashed_password", nullable = false)
     private String hashedPassword;
 
     @Column(name = "role")
     private Boolean role;
 
-    @ManyToOne
-    @JoinColumn(name = "UserID", referencedColumnName = "UserID")
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private UserEntity user;
+
+
 }
