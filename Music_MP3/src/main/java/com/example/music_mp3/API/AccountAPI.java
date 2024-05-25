@@ -1,4 +1,4 @@
-package com.example.music_mp3.API;
+package com.example.music_mp3.Api;
 
 import com.example.music_mp3.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
