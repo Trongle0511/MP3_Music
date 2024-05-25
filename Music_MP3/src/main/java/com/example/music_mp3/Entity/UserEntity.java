@@ -19,17 +19,21 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userID;
+    @Column(name = "Id")
+    private Integer id;
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "phone", nullable = false, length = 15)
+    @Column(name = "phone", nullable = false)
     private String phone;
 
     @Column(name = "image")
     private String image;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AccountsEntity> accounts;
+    @OneToOne
+    @JoinColumn(name = "account_ID", referencedColumnName = "user_Id")
+    private AccountsEntity account;
+
+
 }
