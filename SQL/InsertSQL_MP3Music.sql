@@ -8,9 +8,9 @@ go
 -- Insert data into the Users table
 -- Inserting data into Account table
 INSERT INTO Account (username, email, hashed_password, role) VALUES 
-('johndoe', 'johndoe@example.com', 'hashedpassword123', 0),
-('janedoe', 'janedoe@example.com', 'hashedpassword456', 1),
-('adminuser', 'admin@example.com', 'hashedpassword789', 1);
+('johndoe', 'abc@gmail.com', '$2a$12$NtnhefK8AlaqnheWo0VruObg3LVe.W45MhJupHLulRjR7rNdP5tKu', 0),
+('janedoe', 'janedoe@gmail.com', '$2a$12$NtnhefK8AlaqnheWo0VruObg3LVe.W45MhJupHLulRjR7rNdP5tKu', 0),
+('adminuser', 'admin@gmail.com', '$2a$12$NtnhefK8AlaqnheWo0VruObg3LVe.W45MhJupHLulRjR7rNdP5tKu', 1);
 
 -- Inserting data into Users table
 INSERT INTO Users (name, phone, image, account_ID) VALUES

@@ -24,7 +24,9 @@ CREATE TABLE Users (
     name VARCHAR(100) NOT NULL,
     phone VARCHAR(15) NOT NULL,
     image VARCHAR(MAX),
-	account_ID int null foreign key references Account(user_Id)
+	account_ID INT UNIQUE, -- Thiết lập cột account_ID là duy nhất
+    FOREIGN KEY (account_ID) REFERENCES Account(user_Id)
+--	account_ID int null foreign key references Account(user_Id)
 );
 -- Bảng Nghệ sĩ (Artists)
 CREATE TABLE Artists (
