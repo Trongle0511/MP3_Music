@@ -9,6 +9,9 @@
         <module name="Music_MP3" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Music_MP3" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
