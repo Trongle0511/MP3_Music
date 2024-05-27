@@ -69,14 +69,13 @@ public class HomeController {
     public String forgotpassword() {
         return "Admin/auth/forgot-password";
     }
-
     @GetMapping("/reset")
     public String reset() {
         return "Admin/auth/reset-password";
     }
-
     @GetMapping("/detail")
     public String detail() {
+
         return "Home/SinglePlaylistScreen";
     }
 }
