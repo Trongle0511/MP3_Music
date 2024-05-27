@@ -51,6 +51,10 @@ public class HomeController {
                 return "redirect:/admin";
             } else {
                 // Đăng nhập thành công cho vai trò user
+                // lưu email vào session
+                session.setAttribute("email", email);
+                String userEmail = (String) session.getAttribute("email");
+                System.out.println(userEmail);
                 return "redirect:/MusicMp3";
             }
         } else {
