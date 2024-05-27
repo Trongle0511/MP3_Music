@@ -36,16 +36,20 @@ public class HomeController {
     public String submitLogin(@RequestParam("email") String email,
                               @RequestParam("hashedPassword") String password,
                               Model model ) {
-        // lưu email vào session
-        session.setAttribute("email", email);
-        String userEmail = (String) session.getAttribute("email");
-        System.out.println(userEmail);
         if (authService.authenticateUser(email, password)) {
             if (authService.isAdmin(email) ) {
                 // Đăng nhập thành công cho vai trò admin
+                // lưu email vào session
+                session.setAttribute("email", email);
+                String userEmail = (String) session.getAttribute("email");
+                System.out.println(userEmail);
                 return "redirect:/admin";
             } else {
                 // Đăng nhập thành công cho vai trò user
+                // lưu email vào session
+                session.setAttribute("email", email);
+                String userEmail = (String) session.getAttribute("email");
+                System.out.println(userEmail);
                 return "redirect:/MusicMp3";
             }
         } else {
