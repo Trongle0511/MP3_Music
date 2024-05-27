@@ -1,6 +1,11 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+# Datasource local storage ignored files
+/../../../../:\LTJava5\MP3_Music\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files

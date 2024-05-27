@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRepository extends JpaRepository<AccountsEntity, Integer> {
     AccountsEntity findByEmail(String email);
+
+    AccountsEntity findByResetToken(String resetToken);
 }

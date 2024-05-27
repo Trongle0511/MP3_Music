@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.UUID;
 
 @Controller
 public class HomeController {
@@ -21,6 +22,8 @@ public class HomeController {
 
     @Autowired
     private AccountService authService;
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private HttpSession session;
@@ -71,8 +74,39 @@ public class HomeController {
     }
 
     @GetMapping("/reset")
-    public String reset() {
-        return "Admin/auth/reset-password";
+    public String reset(HttpServletRequest request, @RequestParam("email") String email) {
+        AccountsEntity user = accountService.findUserByEmail(email);
+        if (user == null) {
+            return "Email address not found";
+        }
+
+        String token = accountService.generateResetToken(email);
+        String resetUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/api/change-password?token=" + token;
+
+        // In URL đặt lại mật khẩu ra console thay vì gửi email
+        System.out.println("Reset password URL: " + resetUrl);
+
+        return "Password reset token generated and URL printed to console.";
+    }
+
+    @GetMapping("/change-password")
+    public String showChangePasswordPage(@RequestParam("token") String token) {
+        AccountsEntity user = accountService.findUserByResetToken(token);
+        if (user == null) {
+            return "Invalid token";
+        }
+        return "Please provide a new password";
+    }
+
+    @PostMapping("/save-password")
+    public String savePassword(@RequestParam("token") String token, @RequestParam("password") String password) {
+        AccountsEntity user = accountService.findUserByResetToken(token);
+        if (user == null) {
+            return "Invalid token";
+        }
+        accountService.changeUserPassword(user, password);
+        return "Password successfully changed";
+
     }
 
     @GetMapping("/detail")
