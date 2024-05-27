@@ -5,8 +5,15 @@ go
 -- delete from Account
 -- go
 
+-- Insert data into the Users table
+-- Inserting data into Account table
+INSERT INTO Account (username, email, hashed_password, role) VALUES 
+('johndoe', 'abc@gmail.com', '$2a$12$NtnhefK8AlaqnheWo0VruObg3LVe.W45MhJupHLulRjR7rNdP5tKu', 0),
+('janedoe', 'janedoe@gmail.com', '$2a$12$NtnhefK8AlaqnheWo0VruObg3LVe.W45MhJupHLulRjR7rNdP5tKu', 0),
+('adminuser', 'admin@gmail.com', '$2a$12$NtnhefK8AlaqnheWo0VruObg3LVe.W45MhJupHLulRjR7rNdP5tKu', 1);
 
-INSERT INTO Accounts (Username, Email, Hashed_Password, is_admin) VALUES ('john.doe','trongle311021@gmail.com','$2a$12$HEOZxVFs3Fn771yu1RPAYOVd/o7pKT6tnvJ6di13Esmg035Pk.Iaa', 0);
-INSERT INTO Accounts (username, email, hashed_password, is_admin) VALUES ('jane.smith','trongle@gmail.com', '$2a$12$HEOZxVFs3Fn771yu1RPAYOVd/o7pKT6tnvJ6di13Esmg035Pk.Iaa', 0);
-INSERT INTO Accounts (username, email, hashed_password, is_admin) VALUES ('admin', 'admin@gmail.com', '$2a$12$en5ZfBVuv44iqK6IktThDOUw3QYoKnbPpRymLs1o1Duc.cy4G7Hy.', 1);
-INSERT INTO Accounts (username, email, hashed_password, is_admin) VALUES ('site_user', 'abc@gmail.com', '$2a$12$qTSuT5h7Y3tsXQ/YO63iEecCyKmu.Bgg0K6Lr.lktxdAwxc8MhJE6', 0);
+-- Inserting data into Users table
+INSERT INTO Users (name, phone, image, account_ID) VALUES
+('John Doe', '123-456-7890', 'john_image.png', 1),
+('Jane Doe', '987-654-3210', 'jane_image.png', 2),
+('Admin User', '555-555-5555', 'admin_image.png', 3);

@@ -1,92 +1,91 @@
-use master
-go
+USE master;
+GO
 
-drop database if exists DuAnMP3_Music
-go
+DROP DATABASE IF EXISTS DuAnMP3_Music;
+GO
 
-create database DuAnMP3_Music
-go
+CREATE DATABASE DuAnMP3_Music;
+GO
 
-use DuAnMP3_Music
-go
+USE DuAnMP3_Music;
+GO
+-- Bảng Account
+CREATE TABLE Account (
+    user_Id INT IDENTITY(1,1) PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    hashed_password VARCHAR(255) NOT NULL,
+    role BIT
 
--- Bảng tài khoản người dùng
-CREATE TABLE Accounts (
-    ID INT PRIMARY KEY IDENTITY(1,1),
-    Username NVARCHAR(50) NOT NULL,
-    Email NVARCHAR(100) NOT NULL,
-    Hashed_Password NVARCHAR(255) NOT NULL,
-	is_disable      bit default 0,
-    is_admin        bit
 );
-
--- Bảng nghệ sĩ
+-- Bảng User
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    image VARCHAR(MAX),
+	account_ID INT UNIQUE, -- Thiết lập cột account_ID là duy nhất
+    FOREIGN KEY (account_ID) REFERENCES Account(user_Id)
+--	account_ID int null foreign key references Account(user_Id)
+);
+-- Bảng Nghệ sĩ (Artists)
 CREATE TABLE Artists (
-    ArtistID INT PRIMARY KEY IDENTITY(1,1),
-    ArtistName NVARCHAR(100) NOT NULL,
-    DOB DATE,
-    Country NVARCHAR(50)
+    ArtistID INT IDENTITY(1,1) PRIMARY KEY,
+    ArtistName VARCHAR(100) NOT NULL
 );
 
--- Bảng album
-CREATE TABLE Albums (
-    AlbumID INT PRIMARY KEY IDENTITY(1,1),
-    AlbumName NVARCHAR(100) NOT NULL,
-    ReleaseYear date,
+-- Bảng Album
+CREATE TABLE Album (
+    AlbumID INT IDENTITY(1,1) PRIMARY KEY,
+    AlbumName VARCHAR(100) NOT NULL,
     ArtistID INT,
     FOREIGN KEY (ArtistID) REFERENCES Artists(ArtistID)
 );
 
--- Bảng bài hát
+-- Bảng Thể loại (Genres)
+CREATE TABLE Genres (
+    GenreID INT IDENTITY(1,1) PRIMARY KEY,
+    GenreName VARCHAR(50) NOT NULL
+);
+
+-- Bảng Bài hát (Songs)
 CREATE TABLE Songs (
-    SongID INT PRIMARY KEY IDENTITY(1,1),
-    SongName NVARCHAR(100) NOT NULL,
-    Duration TIME,
+    SongID INT IDENTITY(1,1) PRIMARY KEY,
+    SongName VARCHAR(100) NOT NULL,
+    Image VARCHAR(MAX),
+    AudioFile VARCHAR(MAX),
     AlbumID INT,
     ArtistID INT,
-    FOREIGN KEY (AlbumID) REFERENCES Albums(AlbumID),
-    FOREIGN KEY (ArtistID) REFERENCES Artists(ArtistID)
-);
-
--- Bảng thể loại
-CREATE TABLE Genres (
-    GenreID INT PRIMARY KEY IDENTITY(1,1),
-    GenreName NVARCHAR(50) NOT NULL
-);
-
--- Bảng chi tiết thể loại của bài hát
-CREATE TABLE SongGenres (
-    SongID INT,
     GenreID INT,
-    PRIMARY KEY (SongID, GenreID),
-    FOREIGN KEY (SongID) REFERENCES Songs(SongID),
+    FOREIGN KEY (AlbumID) REFERENCES Album(AlbumID),
+    FOREIGN KEY (ArtistID) REFERENCES Artists(ArtistID),
     FOREIGN KEY (GenreID) REFERENCES Genres(GenreID)
 );
 
--- Bảng đánh giá bài hát
+-- Bảng Đánh giá bài hát (SongRatings)
 CREATE TABLE SongRatings (
     SongID INT,
-    Rating INT CHECK (Rating BETWEEN 1 AND 5),
+    Views INT NOT NULL,
     UserID INT,
-    PRIMARY KEY (SongID, UserID),
     FOREIGN KEY (SongID) REFERENCES Songs(SongID),
-    FOREIGN KEY (UserID) REFERENCES Accounts(ID)
+    FOREIGN KEY (UserID) REFERENCES Account(user_Id),
+    PRIMARY KEY (SongID, UserID)
 );
 
--- Bảng playlist
-CREATE TABLE Playlists (
-    PlaylistID INT PRIMARY KEY IDENTITY(1,1),
-    PlaylistName NVARCHAR(100) NOT NULL,
-    Description NVARCHAR(255),
+-- Bảng Playlist
+CREATE TABLE Playlist (
+    PlaylistID INT IDENTITY(1,1) PRIMARY KEY,
+    PlaylistName VARCHAR(100) NOT NULL,
+    Description TEXT,
     UserID INT,
-    FOREIGN KEY (UserID) REFERENCES Accounts(ID)
+    FOREIGN KEY (UserID) REFERENCES Account(user_Id)
 );
 
--- Bảng chi tiết bài hát trong playlist
+-- Bảng Chi tiết bài hát trong playlist (PlaylistSongs)
 CREATE TABLE PlaylistSongs (
     PlaylistID INT,
     SongID INT,
-    PRIMARY KEY (PlaylistID, SongID),
-    FOREIGN KEY (PlaylistID) REFERENCES Playlists(PlaylistID),
-    FOREIGN KEY (SongID) REFERENCES Songs(SongID)
+    FOREIGN KEY (PlaylistID) REFERENCES Playlist(PlaylistID),
+    FOREIGN KEY (SongID) REFERENCES Songs(SongID),
+    PRIMARY KEY (PlaylistID, SongID)
 );

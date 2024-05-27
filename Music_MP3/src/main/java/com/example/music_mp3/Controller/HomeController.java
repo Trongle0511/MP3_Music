@@ -1,14 +1,13 @@
 package com.example.music_mp3.Controller;
 
-import com.example.music_mp3.Entity.Account;
-import jakarta.servlet.http.HttpServletRequest;
+import com.example.music_mp3.Entity.AccountsEntity;
+import com.example.music_mp3.Service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.sql.SQLException;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -17,17 +16,38 @@ public class HomeController {
 
         return "Home/index";
     }
+    @Autowired
+    private AccountService authService;
+
     @GetMapping("/login")
     public String login(Model model) {
-        Account account = new Account();
+        AccountsEntity account = new AccountsEntity();
         model.addAttribute("account", account);
         return "Admin/auth/login";
     }
+
     @PostMapping("/submitLogin")
-    public String submitLogin(@ModelAttribute("account") Account account, Model model){
-        model.addAttribute("account", account);
-        return "redirect:/MusicMp3";
+    public String submitLogin(@RequestParam("email") String email,
+                              @RequestParam("hashedPassword") String password,
+                              Model model) {
+        if (authService.authenticateUser(email, password)) {
+            if (authService.isAdmin(email)) {
+                // Đăng nhập thành công cho vai trò admin
+                return "redirect:/admin";
+            } else {
+                // Đăng nhập thành công cho vai trò user
+                return "redirect:/MusicMp3";
+            }
+        } else {
+            // Đăng nhập thất bại
+            model.addAttribute("error", "Invalid email or password");
+            model.addAttribute("account", new AccountsEntity());
+            return "redirect:/login";
+        }
     }
+
+
+
     @GetMapping("/register")
     public String register() {
 
