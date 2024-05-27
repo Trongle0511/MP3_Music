@@ -2,6 +2,7 @@ package com.example.music_mp3.Controller;
 
 import com.example.music_mp3.Entity.AccountsEntity;
 import com.example.music_mp3.Service.AccountService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,7 @@ public class HomeController {
     public String submitLogin(@RequestParam("email") String email,
                               @RequestParam("hashedPassword") String password,
                               Model model ) {
+
         if (authService.authenticateUser(email, password)) {
             if (authService.isAdmin(email) ) {
                 // Đăng nhập thành công cho vai trò admin
