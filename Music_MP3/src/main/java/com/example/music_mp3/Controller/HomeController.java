@@ -2,7 +2,6 @@ package com.example.music_mp3.Controller;
 
 import com.example.music_mp3.Data.Entity.AccountsEntity;
 import com.example.music_mp3.Service.AccountService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +28,9 @@ public class HomeController {
     @Autowired
     private HttpSession session;
 
+    @Autowired
+    private HttpSession session;
+
     @GetMapping("/login")
     public String login(Model model) {
         AccountsEntity account = new AccountsEntity();
@@ -40,7 +42,6 @@ public class HomeController {
     public String submitLogin(@RequestParam("email") String email,
                               @RequestParam("hashedPassword") String password,
                               Model model ) {
-
         if (authService.authenticateUser(email, password)) {
             if (authService.isAdmin(email) ) {
                 // Đăng nhập thành công cho vai trò admin
@@ -76,28 +77,9 @@ public class HomeController {
     }
 
     @GetMapping("/reset")
-    public String reset(HttpServletRequest request, @RequestParam("email") String email) {
-        AccountsEntity user = accountService.findUserByEmail(email);
-        if (user == null) {
-            return "Email address not found";
-        }
+    public String reset() {
+        return "Admin/auth/reset-password";
 
-        String token = accountService.generateResetToken(email);
-        String resetUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/api/change-password?token=" + token;
-
-        // In URL đặt lại mật khẩu ra console thay vì gửi email
-        System.out.println("Reset password URL: " + resetUrl);
-
-        return "Password reset token generated and URL printed to console.";
-    }
-
-    @GetMapping("/change-password")
-    public String showChangePasswordPage(@RequestParam("token") String token) {
-        AccountsEntity user = accountService.findUserByResetToken(token);
-        if (user == null) {
-            return "Invalid token";
-        }
-        return "Please provide a new password";
     }
 
     @PostMapping("/save-password")
