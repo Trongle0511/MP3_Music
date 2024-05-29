@@ -15,7 +15,7 @@
 	/* --background-image: linear-gradient(90deg,#21D4FD, #B721FF); */
 	/* --background-image:url("background_image/2725544.jpg"); */
 	/* triend all the above gradients, finally liked the gradient vectored image */
-	--background-image: url(media/background_image/sam2.jpg);
+	/*--background-image: url(media/background_image/sam2.jpg);*/
 	--music-themes-background-image: linear-gradient(
 		90deg,
 		#833ab4,
@@ -24,7 +24,7 @@
 	);
 }
 body {
-	background-image: var(--background-image);
+	background: #170225;
 	margin: 0px;
 	font-family: "Segoe UI", Arial, sans-serif;
 	color: white;
@@ -605,15 +605,15 @@ input[type="checkbox"]:checked ~ .latest-release-dropdown {
 /* divs corresponding to each of the 3 sub sections in the themes section */
 /* party */
 .music-themes-2 .outer-div:nth-child(1) .inner-div {
-	background-image: url("media/music\ themes\ 2/party.jpg");
+	background-image: url("media/music themes 2/party.jpg");
 }
 /* electronic */
 .music-themes-2 .outer-div:nth-child(2) .inner-div {
-	background-image: url("media/music\ themes\ 2/electronic.jpg");
+	background-image: url("media/music themes 2/electronic.jpg");
 }
 /* road */
 .music-themes-2 .outer-div:nth-child(3) .inner-div {
-	background-image: url("media/music\ themes\ 2/road.jpg");
+	background-image: url("media/music themes 2/road.jpg");
 }
 /* hivering actions: the text should be scaled down on hover and the background image should be scaled up at the same time gap */
 .outer-div:hover .inner-div {
