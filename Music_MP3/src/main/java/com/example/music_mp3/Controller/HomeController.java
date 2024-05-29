@@ -22,6 +22,11 @@ public class HomeController {
 
     @Autowired
     private AccountService authService;
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private HttpSession session;
 
     @Autowired
     private HttpSession session;
@@ -70,13 +75,26 @@ public class HomeController {
     public String forgotpassword() {
         return "Admin/auth/forgot-password";
     }
+
     @GetMapping("/reset")
     public String reset() {
         return "Admin/auth/reset-password";
+
     }
+
+    @PostMapping("/save-password")
+    public String savePassword(@RequestParam("token") String token, @RequestParam("password") String password) {
+        AccountsEntity user = accountService.findUserByResetToken(token);
+        if (user == null) {
+            return "Invalid token";
+        }
+        accountService.changeUserPassword(user, password);
+        return "Password successfully changed";
+
+    }
+
     @GetMapping("/detail")
     public String detail() {
-
         return "Home/SinglePlaylistScreen";
     }
 }
