@@ -12,7 +12,7 @@ public class AccountAPI {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("/login")
+    @PostMapping("/loginApi")
     public ResponseEntity<?> login(@RequestParam("email") String email,
                                    @RequestParam("password") String password) {
         if (accountService.authenticateUser(email, password)) {

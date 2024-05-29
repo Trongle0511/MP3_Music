@@ -11,9 +11,15 @@
     <link rel="stylesheet" type="text/css" href="primary page responsive.css"><!-- this is the style sheet with all the media queries -->
     <!-- this script is just for font awesome fonts -->
     <script src="https://kit.fontawesome.com/2d9b67a497.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <!-- body -->
-
+<style>
+    /* Tô màu cho phần đã phát của thanh trượt */
+    input[type="range"]::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, #3498db 0%, #3498db calc(var(--range-value, 0%)), #ddd calc(var(--range-value, 0%) + 1px), #ddd 100%);
+    }
+</style>
 <body>
     <!-- top navigation bar -->
     <nav class="navigation-bar">
@@ -74,6 +80,7 @@
                 <!-- this is the content of the latest release section -->
                 <!-- it will contain the "cards" -->
                 <div class="latest-release-content">
+                    <div id="song-container"></div>
                     <!-- first card -->
                     <div class="card">
                         <div>
@@ -122,218 +129,8 @@
                             </p>
                         </div>
                     </div>
-                    <!-- second card -->
-                    <div class="card">
-                        <div>
-                            <img src="media/songs/dr DRE.jpg">
-                            <div class="play-button">
-                                <i class="fas fa-play" style="width:100%; height:100%; display:inline-block"></i>
-                            </div>
-                        </div>
-                        <div class="song-description">
-                            <h3>
-                                Dr. D.R.E.
-                            </h3>
-                            <p>
-                                Aug 20, 2020
-                            </p>
-                        </div>
-                        <div class="options">
-                            <label for="latest-release-checkbox2"><i class="fas fa-ellipsis-h"></i></label>
-                            <input type="checkbox" id="latest-release-checkbox2">
-                            <div class="latest-release-dropdown">
-                                <div class="drop-item">
-                                    <p><i class="fas fa-play-circle"></i> <a href="SinglePlaylistScreen.html">Play
-                                            Now</a></p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-list-ul"></i> Add to Queue</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-music"></i> Add to playlist</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-info-circle"></i> Get Info</p>
-                                </div>
-                            </div>
-                            <p>
-                                4:44
-                            </p>
-                        </div>
-                    </div>
-                    <!-- third card -->
-                    <div class="card">
-                        <div>
-                            <img src="media/songs/ganja gun.jpg">
-                            <div class="play-button">
-                                <i class="fas fa-play" style="width:100%; height:100%; display:inline-block"></i>
-                            </div>
-                        </div>
-                        <div class="song-description">
-                            <h3>
-                                Ganja Gun
-                            </h3>
-                            <p>
-                                Aug 20, 2020
-                            </p>
-                        </div>
-                        <div class="options">
-                            <label for="latest-release-checkbox3"><i class="fas fa-ellipsis-h"></i></label>
-                            <input type="checkbox" id="latest-release-checkbox3">
-                            <div class="latest-release-dropdown">
-                                <div class="drop-item">
-                                    <p><i class="fas fa-play-circle"></i> <a href="SinglePlaylistScreen.html">Play
-                                            Now</a></p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-list-ul"></i> Add to Queue</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-music"></i> Add to playlist</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-info-circle"></i> Get Info</p>
-                                </div>
-                            </div>
-                            <p>
-                                4:44
-                            </p>
-                        </div>
-                    </div>
-                    <!-- fourth card -->
-                    <div class="card">
-                        <div>
-                            <img src="media/songs/havana.jpg">
-                            <div class="play-button">
-                                <i class="fas fa-play" style="width:100%; height:100%; display:inline-block"></i>
-                            </div>
-                        </div>
-                        <div class="song-description">
-                            <h3>
-                                Havana
-                            </h3>
-                            <p>
-                                Aug 20, 2020
-                            </p>
-                        </div>
-                        <div class="options">
-                            <!-- NOTE THAT POSITION OF OPTIONS DIV IS RELATIVE -->
-                            <label for="latest-release-checkbox4"><i class="fas fa-ellipsis-h"></i></label>
-                            <input type="checkbox" id="latest-release-checkbox4">
-                            <div class="latest-release-dropdown">
-                                <!-- POSITION OF LATEST RELEASE DROPDOWN IS ABSOLUTE TO THE RELATIVE OPTIONS. THIS IS VERY IMPORTANT AS THE DROPDOWN BOX SHOULD BE PLACED RELATIVE TO THE PARTICULAR ITEM IN THE LATEST RELEASE SECTION. IT SHOULD NOT BE ABSAOLUTE TO THE WHOLE LATEST RELEASE SECTION. THROUGH THIS PROJECT i UNDERSTOOD THE NEED OF POSITION:ABSOLUTE. ABSOLUTE POSITION AND RELATIVE ARE GENERALLY USED TOGETHER-->
-                                <div class="drop-item">
-                                    <p><i class="fas fa-play-circle"></i> <a href="SinglePlaylistScreen.html">Play
-                                            Now</a></p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-list-ul"></i> Add to Queue</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-music"></i> Add to playlist</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-info-circle"></i> Get Info</p>
-                                </div>
-                            </div>
-                            <p>
-                                4:44
-                            </p>
-                        </div>
-                    </div>
-                    <!-- fifth card -->
-                    <div class="card">
-                        <div>
-                            <img src="media/songs/loose yourself.jpg">
-                            <div class="play-button">
-                                <i class="fas fa-play" style="width:100%; height:100%; display:inline-block"></i>
-                            </div>
-                        </div>
-                        <div class="song-description">
-                            <h3>
-                                Lose Yourself
-                            </h3>
-                            <p>
-                                Aug 20, 2020
-                            </p>
-                        </div>
-                        <div class="options">
-                            <label for="latest-release-checkbox5"><i class="fas fa-ellipsis-h"></i></label>
-                            <input type="checkbox" id="latest-release-checkbox5">
-                            <div class="latest-release-dropdown">
-                                <div class="drop-item">
-                                    <p><i class="fas fa-play-circle"></i> <a href="SinglePlaylistScreen.html">Play
-                                            Now</a></p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-list-ul"></i> Add to Queue</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-music"></i> Add to playlist</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-info-circle"></i> Get Info</p>
-                                </div>
-                            </div>
-                            <p>
-                                4:44
-                            </p>
-                        </div>
-                    </div>
-                    <!-- sixth card -->
-                    <div class="card">
-                        <div>
-                            <img src="media/songs/the next episode.jpg">
-                            <div class="play-button">
-                                <i class="fas fa-play" style="width:100%; height:100%; display:inline-block"></i>
-                            </div>
-                        </div>
-                        <div class="song-description">
-                            <h3>
-                                The Next Episode
-                            </h3>
-                            <p>
-                                Aug 20, 2020
-                            </p>
-                        </div>
-                        <div class="options">
-                            <label for="latest-release-checkbox6"><i class="fas fa-ellipsis-h"></i></label>
-                            <input type="checkbox" id="latest-release-checkbox6">
-                            <div class="latest-release-dropdown">
-                                <div class="drop-item">
-                                    <p><i class="fas fa-play-circle"></i> <a href="SinglePlaylistScreen.html">Play
-                                            Now</a></p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-list-ul"></i> Add to Queue</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-music"></i> Add to playlist</p>
-                                </div>
-                                <hr>
-                                <div class="drop-item">
-                                    <p><i class="fas fa-info-circle"></i> Get Info</p>
-                                </div>
-                            </div>
-                            <p>
-                                4:44
-                            </p>
-                        </div>
-                    </div>
+
+
                 </div>
             </div>
             <!-- this is the popular artists section -->
@@ -950,17 +747,17 @@
                     Imagine by John
                 </div>
                 <div>
-                    John Lenon
+                    John Lennon
                 </div>
                 <!-- heart icon and ban icon -->
             </div>
             <div class="heart-and-ban-icon">
+            <span>
+                <i class="far fa-heart"></i>
+            </span>
                 <span>
-                    <i class="far fa-heart"></i>
-                </span>
-                <span>
-                    <i class="fas fa-ban"></i>
-                </span>
+                <i class="fas fa-ban"></i>
+            </span>
             </div>
         </div>
         <!-- these are the main player controls -->
@@ -968,7 +765,8 @@
             <div class="controls">
                 <div><i class="fas fa-random"></i></div>
                 <div><i class="fas fa-step-backward"></i></div>
-                <div><i class="fas fa-pause-circle"></i></div>
+                <!-- Play/pause button -->
+                <div id="play-pause-button"><i class="fas fa-play-circle"></i></div>
                 <div><i class="fas fa-step-forward"></i></div>
                 <div><i class="fas fa-redo"></i></div>
             </div>
@@ -976,14 +774,14 @@
             <div id="slider">
                 <!-- current time -->
                 <div class="time">
-                    1:39
+                    <span id="current-time">0:00</span>
                 </div>
-                <div class="slidecontainer">
-                    <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+                <div id="time-slider" class="slidecontainer">
+                    <input type="range" min="0" max="100" value="0" class="slider" id="songTime">
                 </div>
                 <!-- total time -->
                 <div class="time">
-                    4:44
+                    <span id="total-time">0:00</span>
                 </div>
             </div>
         </div>
@@ -999,13 +797,156 @@
                 <i class="fas fa-volume-up"></i>
             </div>
             <div class="slidecontainer" style="width:30%;">
-                <input type="range" min="0" max="100" value="0" class="slider" id="myRange" style="margin-top:0px;">
+                <input type="range" min="0" max="100" value="0" class="slider" id="volumeRange" style="margin-top:0px;">
             </div>
             <div>
                 <i class="fas fa-expand-alt"></i>
             </div>
         </div>
+
+        <!-- Audio element -->
+        <audio id="audio-player" src="library/Music/town-10169.mp3"></audio>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() {
+            try {
+                const response = await axios.get('http://localhost:8083/api-public/song/findAllSongs');
+                console.log('API response:', response.data); // Log API response
+
+                const songs = response.data;
+                const songContainer = document.getElementById('song-container');
+
+                // Clear the song container
+                songContainer.innerHTML = '';
+
+                // Loop through each song and create HTML elements to display them
+                songs.forEach(song => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+
+                    card.innerHTML = `
+                    <div>
+                        <!-- Image corresponding to the card -->
+                        <img src="library/Music/${song.image}" alt="${song.song_name}">
+                        <!-- Play button -->
+                        <div class="play-button">
+                            <i class="fas fa-play" style="width:100%; height:100%; display:inline-block"></i>
+                        </div>
+                    </div>
+                    <!-- Song description -->
+                    <div class="song-description">
+                        <h3>${song.song_name}</h3>
+                        <p>${song.release_date || 'Unknown release date'}</p>
+                    </div>
+                    <!-- Options dropdown -->
+                    <div class="options">
+                        <label for="latest-release-checkbox-${song.SongID}"><i class="fas fa-ellipsis-h"></i></label>
+                        <input type="checkbox" id="latest-release-checkbox-${song.SongID}">
+                        <div class="latest-release-dropdown">
+                            <div class="drop-item">
+                                <!-- Play now button -->
+                                <p><i class="fas fa-play-circle"></i> <a href="SinglePlaylistScreen.html">Play Now</a></p>
+                            </div>
+                            <hr>
+                            <div class="drop-item">
+                                <p><i class="fas fa-list-ul"></i> Add to Queue</p>
+                            </div>
+                            <hr>
+                            <div class="drop-item">
+                                <p><i class="fas fa-music"></i> Add to playlist</p>
+                            </div>
+                            <hr>
+                            <div class="drop-item">
+                                <p><i class="fas fa-info-circle"></i> Get Info</p>
+                            </div>
+                        </div>
+                        <!-- Song duration -->
+                        <p>4:44</p>
+                    </div>
+                    `;
+
+                    songContainer.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching songs:', error);
+            }
+        });
+    </script>
+
+    <script>
+        // Get audio element
+        var audio = document.getElementById("audio-player");
+
+        // Get play/pause button
+        var playPauseButton = document.getElementById("play-pause-button");
+
+        // Play/pause function
+        function togglePlayPause() {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.innerHTML = '<i class="fas fa-pause-circle"></i>';
+            } else {
+                audio.pause();
+                playPauseButton.innerHTML = '<i class="fas fa-play-circle"></i>';
+            }
+        }
+
+        // Add click event listener to play/pause button
+        playPauseButton.addEventListener("click", togglePlayPause);
+
+        // Update current time and total time
+        audio.addEventListener("timeupdate", function() {
+            var currentTime = document.getElementById("current-time");
+            var totalTime = document.getElementById("total-time");
+            currentTime.innerHTML = formatTime(audio.currentTime);
+            totalTime.innerHTML = formatTime(audio.duration);
+        });
+
+        // Function to format time (mm:ss)
+        function formatTime(time) {
+            var minutes = Math.floor(time / 60);
+            var seconds = Math.floor(time % 60);
+            return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        }
+
+        // Volume control
+        var volumeRange = document.getElementById("volumeRange");
+        volumeRange.addEventListener("change", function() {
+            audio.volume = volumeRange.value / 100;
+        });
+        // Lấy phần tử thanh trượt thời gian
+        var timeSlider = document.getElementById("songTime");
+
+        // Khi bài hát được phát, cập nhật giá trị của thanh trượt thời gian
+        audio.addEventListener("timeupdate", function() {
+            var currentTime = audio.currentTime;
+            var duration = audio.duration;
+            var percentage = (currentTime / duration) * 100;
+            timeSlider.value = percentage;
+        });
+
+        // Khi người dùng di chuyển thanh trượt, điều chỉnh thời gian của bài hát
+        timeSlider.addEventListener("input", function() {
+            var percentage = timeSlider.value;
+            var duration = audio.duration;
+            var currentTime = (percentage * duration) / 100;
+            audio.currentTime = currentTime;
+        });
+        // Lấy phần tử thanh trượt thời gian
+        var timeSlider = document.getElementById("songTime");
+
+        // Khi bài hát được phát, cập nhật giá trị của thanh trượt thời gian và tạo biến --range-value
+        audio.addEventListener("timeupdate", function() {
+            var currentTime = audio.currentTime;
+            var duration = audio.duration;
+            var percentage = (currentTime / duration) * 100;
+            timeSlider.value = percentage;
+            timeSlider.style.setProperty('--range-value', percentage + '%');
+        });
+    </script>
+
+
 </body>
 
 </html>
