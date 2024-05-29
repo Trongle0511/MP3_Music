@@ -1,6 +1,6 @@
 package com.example.music_mp3.Controller;
 
-import com.example.music_mp3.Entity.AccountsEntity;
+import com.example.music_mp3.Data.Entity.AccountsEntity;
 import com.example.music_mp3.Service.AccountService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

@@ -1,6 +1,6 @@
 package com.example.music_mp3.Service;
 
-import com.example.music_mp3.Entity.AccountsEntity;
+import com.example.music_mp3.Data.Entity.AccountsEntity;
 import com.example.music_mp3.Repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
